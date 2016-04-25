@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+extern NSString *const serviceName;
+
+//extern NSString *const account;
+
 @interface ViewController : UIViewController
 
 

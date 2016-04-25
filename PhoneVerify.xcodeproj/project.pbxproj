@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D782B8090E8716973E687899 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1BDF0B3D7E30815EC3997BF /* libPods.a */; };
 		D795613E1CC0BEAB00BE4329 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D795613D1CC0BEAB00BE4329 /* main.m */; };
 		D79561411CC0BEAB00BE4329 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D79561401CC0BEAB00BE4329 /* AppDelegate.m */; };
 		D79561441CC0BEAB00BE4329 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D79561431CC0BEAB00BE4329 /* ViewController.m */; };
@@ -15,6 +16,8 @@
 		D795614C1CC0BEAB00BE4329 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D795614A1CC0BEAB00BE4329 /* LaunchScreen.storyboard */; };
 		D79561571CC0BEAB00BE4329 /* PhoneVerifyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D79561561CC0BEAB00BE4329 /* PhoneVerifyTests.m */; };
 		D79561621CC0BEAB00BE4329 /* PhoneVerifyUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = D79561611CC0BEAB00BE4329 /* PhoneVerifyUITests.m */; };
+		D7BE43671CCDFEFD009118BA /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D7BE43661CCDFEFD009118BA /* Security.framework */; };
+		D7BE43691CCE0D48009118BA /* Foundation+Log.m in Sources */ = {isa = PBXBuildFile; fileRef = D7BE43681CCE0D48009118BA /* Foundation+Log.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +38,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4DD3059339FBF3455A8379CD /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		A1BDF0B3D7E30815EC3997BF /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		CA7D5821891CA73312B58652 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		D79561391CC0BEAB00BE4329 /* PhoneVerify.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhoneVerify.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D795613D1CC0BEAB00BE4329 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		D795613F1CC0BEAB00BE4329 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -51,6 +57,8 @@
 		D795615D1CC0BEAB00BE4329 /* PhoneVerifyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PhoneVerifyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D79561611CC0BEAB00BE4329 /* PhoneVerifyUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PhoneVerifyUITests.m; sourceTree = "<group>"; };
 		D79561631CC0BEAB00BE4329 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D7BE43661CCDFEFD009118BA /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		D7BE43681CCE0D48009118BA /* Foundation+Log.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Foundation+Log.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +66,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D7BE43671CCDFEFD009118BA /* Security.framework in Frameworks */,
+				D782B8090E8716973E687899 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,6 +88,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4F8760C16BFABD5572CF1B74 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				CA7D5821891CA73312B58652 /* Pods.debug.xcconfig */,
+				4DD3059339FBF3455A8379CD /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		63BF9BBFFE7736EA6B98F846 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D7BE43661CCDFEFD009118BA /* Security.framework */,
+				A1BDF0B3D7E30815EC3997BF /* libPods.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		D79561301CC0BEAB00BE4329 = {
 			isa = PBXGroup;
 			children = (
@@ -85,6 +113,8 @@
 				D79561551CC0BEAB00BE4329 /* PhoneVerifyTests */,
 				D79561601CC0BEAB00BE4329 /* PhoneVerifyUITests */,
 				D795613A1CC0BEAB00BE4329 /* Products */,
+				4F8760C16BFABD5572CF1B74 /* Pods */,
+				63BF9BBFFE7736EA6B98F846 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -105,6 +135,7 @@
 				D79561401CC0BEAB00BE4329 /* AppDelegate.m */,
 				D79561421CC0BEAB00BE4329 /* ViewController.h */,
 				D79561431CC0BEAB00BE4329 /* ViewController.m */,
+				D7BE43681CCE0D48009118BA /* Foundation+Log.m */,
 				D79561451CC0BEAB00BE4329 /* Main.storyboard */,
 				D79561481CC0BEAB00BE4329 /* Assets.xcassets */,
 				D795614A1CC0BEAB00BE4329 /* LaunchScreen.storyboard */,
@@ -147,9 +178,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D79561661CC0BEAB00BE4329 /* Build configuration list for PBXNativeTarget "PhoneVerify" */;
 			buildPhases = (
+				23D767868AF3DC3A0126FB57 /* Check Pods Manifest.lock */,
 				D79561351CC0BEAB00BE4329 /* Sources */,
 				D79561361CC0BEAB00BE4329 /* Frameworks */,
 				D79561371CC0BEAB00BE4329 /* Resources */,
+				66B969A81C60EE70DE1F7D14 /* Embed Pods Frameworks */,
+				75FC517CD2DAA9E07E76DD44 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -265,6 +299,54 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		23D767868AF3DC3A0126FB57 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		66B969A81C60EE70DE1F7D14 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		75FC517CD2DAA9E07E76DD44 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		D79561351CC0BEAB00BE4329 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -273,6 +355,7 @@
 				D79561441CC0BEAB00BE4329 /* ViewController.m in Sources */,
 				D79561411CC0BEAB00BE4329 /* AppDelegate.m in Sources */,
 				D795613E1CC0BEAB00BE4329 /* main.m in Sources */,
+				D7BE43691CCE0D48009118BA /* Foundation+Log.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -411,6 +494,7 @@
 		};
 		D79561671CC0BEAB00BE4329 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CA7D5821891CA73312B58652 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = PhoneVerify/Info.plist;
@@ -422,6 +506,7 @@
 		};
 		D79561681CC0BEAB00BE4329 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4DD3059339FBF3455A8379CD /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = PhoneVerify/Info.plist;
@@ -498,6 +583,7 @@
 				D79561681CC0BEAB00BE4329 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D79561691CC0BEAB00BE4329 /* Build configuration list for PBXNativeTarget "PhoneVerifyTests" */ = {
 			isa = XCConfigurationList;
@@ -506,6 +592,7 @@
 				D795616B1CC0BEAB00BE4329 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D795616C1CC0BEAB00BE4329 /* Build configuration list for PBXNativeTarget "PhoneVerifyUITests" */ = {
 			isa = XCConfigurationList;
@@ -514,6 +601,7 @@
 				D795616E1CC0BEAB00BE4329 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
