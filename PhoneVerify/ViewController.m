@@ -8,12 +8,14 @@
 
 #import "ViewController.h"
 #import <SSKeychain.h>
-#import <CommonCrypto/CommonDigest.h>
+#import "MBProgressHUD+MJ.h"
+#import "NSString+Hash.h"
+#import "DLHttpTool.h"
 
-NSString *const serviceName = @"net.eastunion";
-//NSString *const account = @"你好";
+/** 存入钥匙串的服务信息 */
+NSString * const serviceName = @"net.eastunion";
+
 #define AccountKey @"account"
-//#define password @"net.eastunion"
 
 
 @interface ViewController ()
@@ -29,6 +31,9 @@ NSString *const serviceName = @"net.eastunion";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.passwordTextfield.secureTextEntry = YES;
+    
     // 取出所有用户
     NSArray *allAcounts = [SSKeychain allAccounts];
     
@@ -41,16 +46,15 @@ NSString *const serviceName = @"net.eastunion";
         NSString *account = dict[@"acct"];
         
         if ([account isEqualToString:getAccount]) {
-            
             self.accountTextfield.text = account;
-            
+            // 判断密码是否存在，如果存在直接显示
             NSString *password = [SSKeychain passwordForService:serviceName account:account];
             
             self.passwordTextfield.text = password;
         }
     }
     
-    NSLog(@"%@", allAcounts);
+//    NSLog(@"%@", allAcounts);
     
 }
 
@@ -62,14 +66,52 @@ NSString *const serviceName = @"net.eastunion";
     
     NSString *account = self.accountTextfield.text;
     NSString *password = self.passwordTextfield.text;
-    
-    if (![account isEqualToString:@""] && ![password isEqualToString:@""] ) {
-        [SSKeychain setPassword:password forService:serviceName account:account];
-        
-        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        [defaults setObject:account forKey:AccountKey];
-        [defaults synchronize];
+    // 1.判断账户密码 是否为空
+    if (account.length == 0) {
+        [MBProgressHUD showError:@"请输入用户名"];
+        return;
     }
+    if (password.length == 0) {
+        [MBProgressHUD showError:@"请输入密码"];
+        return;
+    }
+    // 2.存入钥匙串
+    [SSKeychain setPassword:password forService:serviceName account:account];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:account forKey:AccountKey];
+    [defaults synchronize];
+    
+    // 3.发送数据到服务器
+//    NSString *url = @"";
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    params[@"account"] = account;
+    // md5加密,也可以哈希加密
+    params[@"password"] = [[password stringByAppendingString:@"abcde"] md5String];
+    
+    NSString *md5 = [password md5String];
+    NSString *md5Salt = [[password stringByAppendingString:@"abcde"] md5String];
+    NSString *twoMd5 = [md5Salt md5String];
+    
+    NSLog(@"%@", md5);
+    NSLog(@"%@", md5Salt);
+    NSLog(@"%@", twoMd5);
+    
+    NSString *sha1 = [password sha1String];
+    NSLog(@"sha1--%@", sha1);
+    NSString *sha256 = [password sha256String];
+    NSLog(@"sha256--%@", sha256);
+    NSString *sha512 = [password sha512String];
+    NSLog(@"sha512--%@", sha512);
+    
+//    [DLHttpTool postWithURL:url params:params success:^(id json) {
+//        
+//        NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:json options:NSJSONReadingMutableLeaves error:nil];
+//        NSLog(@"%@", dict);
+//        
+//        
+//    } failure:^(NSError *error) {
+//        
+//    }];
     
 }
 
@@ -84,55 +126,6 @@ NSString *const serviceName = @"net.eastunion";
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
     [self.view endEditing:YES];
-}
-
-//- (NSString *)md5:(NSString *)str{
-//    // 转化成utf-8
-//    const char *cStr=[str UTF8String];
-//    // 开辟一个16字节(128位:MD5加密出来就是128位/bit(字节)，1字节=8位)的空间
-//    unsigned char result[16];
-//    // 加密存储到result中，将cStr字符串转换成了32位，一般来说，此过程不可逆，即只能加密，不能解密
-//    CC_MD5(cStr, strlen(cStr), result);
-//    // 其中%02x是格式控制符：‘x’表示以16进制输出，‘02’表示不足两位，前面补0
-//    return [NSString stringWithFormat:@"%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x",
-//            result[0], result[1], result[2], result[3],
-//            result[4], result[5], result[6], result[7],
-//            result[8], result[9], result[10], result[11],
-//            result[12], result[13], result[14], result[15]];
-//}
-
-// md5加密另一种写法：利用for循环输出
-- (NSString *)md5:(NSString *)str{
-    // 转化成utf-8
-    const char *cStr=[str UTF8String];
-    // 开辟一个16字节(128位:MD5加密出来就是128位/bit(字节)，1字节=8位)的空间
-    unsigned char result[16];
-    // 加密存储到result中，将cStr字符串转换成了32位
-    CC_MD5(cStr, strlen(cStr), result);
-    // 其中%02x是格式控制符：‘x’表示以16进制输出，‘02’表示不足两位，前面补0
-    NSMutableString *mStr=[NSMutableString stringWithCapacity:CC_MD5_DIGEST_LENGTH];
-    for (int i=0; i<CC_MD5_DIGEST_LENGTH; i++) {
-        [mStr appendFormat:@"%02X",result[i]];
-    }
-    return mStr;
-}
-
-// sha1加密
-- (NSString *)sha1:(NSString *)str{
-    const char *cStr=[str cStringUsingEncoding:NSUTF8StringEncoding];
-    NSData *data=[NSData dataWithBytes:cStr length:str.length];
-    
-    uint8_t disgest[CC_SHA1_DIGEST_LENGTH];
-    
-    CC_SHA1(data.bytes, data.length, disgest);
-    
-    NSMutableString *output=[NSMutableString stringWithCapacity:CC_SHA1_DIGEST_LENGTH*2];
-    
-    for (int i=0; i<CC_SHA1_DIGEST_LENGTH; i++) {
-        [output appendFormat:@"%02x",disgest[i]];
-    }
-    
-    return output;
 }
 
 
